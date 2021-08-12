@@ -27,22 +27,22 @@ class Jogador():
     
     def deve_comprar(self, propriedade):
         if self.comportamento == "Impulsivo":
-            print('Jogador é impulsivo e vai comprar o imóvel')
+            print('Jogador eh impulsivo e vai comprar o imovel')
             return True
         elif self.comportamento == "Exigente":
-            if propriedade.custo_venda > 50:
+            if propriedade.valor_aluguel > 50:
                 return True
             else:
-                print(f'Jogador é exigente, a propriedade custa {propriedade.custo_venda}')
+                print(f'Jogador eh exigente, a propriedade custa {propriedade.custo_venda}')
         elif self.comportamento == "Cauteloso":
             if self.saldo - propriedade.custo_venda > 80:
                 return True
             else:
-                print(f'Jogador é Cauteloso, a propriedade custa {propriedade.custo_venda} e seu saldo é {self.saldo}')
+                print(f'Jogador eh Cauteloso, a propriedade custa {propriedade.custo_venda} e seu saldo eh {self.saldo}')
         elif self.comportamento == "Aleatorio":
             if randint(1, 2) == 1:
                 return True
             else:
-                print('Jogador aleatório não estava com vontade')
+                print('Jogador aleatorio nao estava com vontade')
 
 

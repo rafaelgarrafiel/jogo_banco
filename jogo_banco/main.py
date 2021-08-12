@@ -25,7 +25,7 @@ def main():
         while inicio:
 
             for jogador in tabuleiro.jogadores:
-                print(f'Jogador atual é: {jogador.comportamento}, sua posição é {jogador.posicao_tabuleiro}')
+                print(f'Jogador atual eh: {jogador.comportamento}, sua posição eh {jogador.posicao_tabuleiro}')
                 if jogador.jogando:
                     tabuleiro.jogada(jogador)
 
@@ -40,7 +40,7 @@ def main():
                 print(f'Rodada {rodada}, sem vencedor!')
                 rodada += 1
         
-        print(f'O vencedor é: {tabuleiro.vencedor}, seu saldo é: {tabuleiro.vencedor.saldo}')
+        print(f'O vencedor eh: {tabuleiro.vencedor}, seu saldo eh: {tabuleiro.vencedor.saldo}')
         for jogador in tabuleiro.jogadores:
             print(f'O saldo do jogador {jogador} terminou: {jogador.saldo}')
 
