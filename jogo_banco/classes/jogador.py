@@ -16,7 +16,10 @@ class Jogador():
 
     def sacar(self, valor):
         self.saldo -= valor 
-        return self.saldo
+        if self.saldo < 0:
+            return False
+        else:
+            return True
     
     def receber(self, valor):
         self.saldo += valor
@@ -41,6 +44,5 @@ class Jogador():
                 return True
             else:
                 print('Jogador aleatório não estava com vontade')
-    def verifica_saldo(self):
-        return self.saldo
+
 

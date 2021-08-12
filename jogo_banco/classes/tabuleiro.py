@@ -15,8 +15,8 @@ class Tabuleiro():
     def verifica_posicao(self, atual, rolagem):
         posicao = atual + rolagem
         volta = 0
-        if posicao > 19:
-            posicao = posicao - 19
+        if posicao > 20:
+            posicao = posicao - 20
             volta = 1
         return posicao, volta
     
@@ -29,21 +29,21 @@ class Tabuleiro():
             print(f'Jogador {jogador.comportamento} completou uma volta')
             jogador.receber(100) 
 
-        if self.propriedades[jogador.posicao_tabuleiro].proprietario==None:
+        if self.propriedades[jogador.posicao_tabuleiro -1].proprietario==None:
             print('Não tem proprietário no imóvel')
-            resultado = jogador.deve_comprar(self.propriedades[jogador.posicao_tabuleiro])
+            resultado = jogador.deve_comprar(self.propriedades[jogador.posicao_tabuleiro -1])
             if resultado:
-                print(f'Jogador: {jogador.comportamento} vai comprar {self.propriedades[jogador.posicao_tabuleiro].posicao}')
-                continua_jogo = jogador.sacar(self.propriedades[jogador.posicao_tabuleiro].custo_venda)
+                print(f'Jogador: {jogador.comportamento} vai comprar {self.propriedades[jogador.posicao_tabuleiro -1].posicao}')
+                continua_jogo = jogador.sacar(self.propriedades[jogador.posicao_tabuleiro -1].custo_venda)
                 jogador.jogando = continua_jogo
                 if continua_jogo == False:
                     print(f'Jogador {jogador.comportamento} está negativo')
                     self.remove_jogador(jogador)
                 else:
-                    self.propriedades[jogador.posicao_tabuleiro].proprietario = jogador
-        elif self.propriedades[jogador.posicao_tabuleiro].proprietario!=jogador:
-            print(f'Jogador {jogador.comportamento} vai pagar aluguel para {self.propriedades[jogador.posicao_tabuleiro].proprietario.comportamento}')
-            continua_jogo = jogador.sacar(self.propriedades[jogador.posicao_tabuleiro].valor_aluguel)
+                    self.propriedades[jogador.posicao_tabuleiro -1].proprietario = jogador
+        elif self.propriedades[jogador.posicao_tabuleiro -1].proprietario!=jogador:
+            print(f'Jogador {jogador.comportamento} vai pagar aluguel para {self.propriedades[jogador.posicao_tabuleiro -1].proprietario.comportamento}')
+            continua_jogo = jogador.sacar(self.propriedades[jogador.posicao_tabuleiro -1].valor_aluguel)
             jogador.jogando = continua_jogo
             if continua_jogo == False:
                 print(f'Jogador {jogador.comportamento} está negativo')
@@ -55,10 +55,11 @@ class Tabuleiro():
                 propriedade.proprietario = None
     
     def verifica_vencedor(self, rodada):
-        if rodada == 10:
+        
+        if rodada == 1000:
             self.vencedor = self.jogadores[0]
             for jogador in self.jogadores:
-                if jogador.verifica_saldo() > self.vencedor.verifica_saldo():
+                if jogador.saldo > self.vencedor.saldo:
                     self.vencedor = jogador
             return True
         else:

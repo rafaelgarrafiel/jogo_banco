@@ -6,7 +6,7 @@ from random import choice
 def main():
     partidas = []
 
-    for und in range(1, 11):
+    for und in range(1, 2):
 
         # Iniciando o tabuleiro
         tabuleiro = Tabuleiro()
@@ -41,6 +41,8 @@ def main():
                 rodada += 1
         
         print(f'O vencedor é: {tabuleiro.vencedor}, seu saldo é: {tabuleiro.vencedor.saldo}')
+        for jogador in tabuleiro.jogadores:
+            print(f'O saldo do jogador {jogador} terminou: {jogador.saldo}')
 
 if __name__ == "__main__":
     main()
