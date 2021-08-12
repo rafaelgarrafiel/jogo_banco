@@ -22,31 +22,24 @@ class Tabuleiro():
     
     def jogada(self, jogador):
         rolagem = jogador.rolagem_dado()
-        print(f'Jogador tirou: {rolagem}')
         posicao, volta = self.verifica_posicao(jogador.posicao_tabuleiro, rolagem)
         jogador.posicao_tabuleiro = posicao
         if volta:
-            print(f'Jogador {jogador.comportamento} completou uma volta')
             jogador.receber(100) 
 
         if self.propriedades[jogador.posicao_tabuleiro -1].proprietario==None:
-            print('Não tem proprietario no imóvel')
             resultado = jogador.deve_comprar(self.propriedades[jogador.posicao_tabuleiro -1])
             if resultado:
-                print(f'Jogador: {jogador.comportamento} vai comprar {self.propriedades[jogador.posicao_tabuleiro -1].posicao}')
                 continua_jogo = jogador.sacar(self.propriedades[jogador.posicao_tabuleiro -1].custo_venda)
                 jogador.jogando = continua_jogo
                 if continua_jogo == False:
-                    print(f'Jogador {jogador.comportamento} esta negativo')
                     self.remove_jogador(jogador)
                 else:
                     self.propriedades[jogador.posicao_tabuleiro -1].proprietario = jogador
         elif self.propriedades[jogador.posicao_tabuleiro -1].proprietario!=jogador:
-            print(f'Jogador {jogador.comportamento} vai pagar aluguel para {self.propriedades[jogador.posicao_tabuleiro -1].proprietario.comportamento}')
             continua_jogo = jogador.sacar(self.propriedades[jogador.posicao_tabuleiro -1].valor_aluguel)
             jogador.jogando = continua_jogo
             if continua_jogo == False:
-                print(f'Jogador {jogador.comportamento} está negativo')
                 self.remove_jogador(jogador)
 
     def remove_jogador(self, jogador):
@@ -56,6 +49,13 @@ class Tabuleiro():
                 propriedade.proprietario = None
     
     def verifica_vencedor(self, rodada):
+        """"
+        :param rodada: número da rodada
+        :result[0]: Se houve vencedor
+        :result[1]: Se venceu por limite de rodadas
+        """
+        # print(len(self.jogadores))
+        # print(f'Rodada: {rodada}')
         if len(self.jogadores) != 1:
             if rodada == 1000:
                 self.vencedor = self.jogadores[0]
@@ -65,9 +65,9 @@ class Tabuleiro():
                     elif jogador.saldo == self.vencedor.saldo:
                         if jogador.ordem_turno > self.vencedor.ordem_turno:
                             self.vencedor = jogador
-                    return True
+                    return True, True
             else:
-                return False
+                return False, False
         else:
             self.vencedor = self.jogadores[0]
-            return True
+            return True, False
