@@ -6,7 +6,7 @@ Projeto desenvolvido para atender ao solicitado no teste de python
 
 ## Autor
 
-- [@rafaelgarrafiel](https://www.github.com/octokatherine)
+- [@rafaelgarrafiel](https://www.github.com/rafaelgarrafiel)
 
   
 ## Instalação
